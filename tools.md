@@ -28,6 +28,8 @@ General tools
 ### `man` - documentation for Unix tools and C functions (The most important tool)
 ### `wget` - tool for downloading webpages
 ### `echo` - prints out to the terminal
+### `who` - prints out a list of users who are logged in
+### `vim` - everyone's favorite text editor
 
 Navigation
 ----------
