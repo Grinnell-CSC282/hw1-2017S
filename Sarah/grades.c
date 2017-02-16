@@ -3,7 +3,7 @@
 #include <string.h>
 
 // Find the current lowest grade in the top 5 grades
-int 
+int
 get_lowest_grade (int highest_grades[])
 {
 	int lowest = 110; // grades cannot be higher than 100
@@ -17,7 +17,7 @@ get_lowest_grade (int highest_grades[])
 
 // Updates the 5 highest grades with the new grade
 void
-update_highest_grades (int grade, int highest_grades[]) 
+update_highest_grades (int grade, int highest_grades[])
 {
 	int lowest = get_lowest_grade (highest_grades);
 	int flag = 1;
@@ -52,14 +52,15 @@ main()
 	FILE* input = fopen ("input", "r");
 	while(fgets (student, 1024, input))
 	{
+		printf("%s\n", student);
 		split_student_string (student, student_split);
 		if (strcmp (&student_split[2], "homework 2") == 0) {
 			update_highest_grades (student_split[3], highest_grades);
 		}
 	}
 
-	printf ("The five highest grades on homework 2 are: %d, %d, %d, %d, %d\n", 
-			highest_grades[0], highest_grades[1], highest_grades[2], 
+	printf ("The five highest grades on homework 2 are: %d, %d, %d, %d, %d\n",
+			highest_grades[0], highest_grades[1], highest_grades[2],
 			highest_grades[3], highest_grades[4]);
 
 	free (student);

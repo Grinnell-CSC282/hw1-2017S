@@ -9,23 +9,20 @@
 #define STOP 0
 
 
-int static
-STATE = GO;
+int static STATE = GO;
 
-int static
-getLine (char * str, FILE * src);
+int static getLine (char *str, FILE * src);
 
-void
-cleanBlank (char * str, int index);
+void cleanBlank (char *str, int index);
 
-void
-cleanUp (FILE * src, FILE * des);
+void cleanUp (FILE * src, FILE * des);
 
 int
-main(int argc, char const *argv[]) {
-  FILE * input = fopen ("Input.txt", "r");
-  FILE * output = fopen ("Output.txt", "w");
-  cleanUp(input, output);
+main (int argc, char const *argv[])
+{
+  FILE *input = fopen ("Input.txt", "r");
+  FILE *output = fopen ("Output.txt", "w");
+  cleanUp (input, output);
   fclose (input);
   fclose (output);
   return 0;
@@ -35,36 +32,47 @@ main(int argc, char const *argv[]) {
 //    get there later.
 // this funtion reads each line, and saves it in a buffer.
 int static
-getLine (char * str, FILE * src){
-  int i;
-  char c;
+getLine (char *str, FILE * src)
+{
+  int i;              // index
+  char c;             // read char is saved here
   //function reads line until it meets new line, EOF or runs out.
-  for(i = 0; i < BUFFERSIZE && (c = fgetc(src)) != '\n' && c != EOF; i++){
-    str[i] = c;
-  }
-  if (c == EOF){
-    STATE = STOP;
-  }
+  for (i = 0; i < BUFFERSIZE && (c = fgetc (src)) != '\n' && c != EOF; i++)
+    {
+      str[i] = c;
+    } // for
+  // checks to see if c is EOF
+  if (c == EOF)
+    {
+      STATE = STOP;
+    } // if
   return i;
 }
 
 //function clears blank space in the end of str
 void
-cleanBlank (char * str, int index){
-    while (isblank (str[--index]));
-    str[index + 1] = '\0';
+cleanBlank (char *str, int index)
+{
+  //while the end of str is blank, keep going back
+  while (isblank (str[--index]))
+  ;
+  str[index + 1] = '\0';
 }
 
 //this function combines getLine and cleanBlank. Also prints out our line
 //  into output file.
 void
-cleanUp (FILE * src, FILE * des){
-  char str[BUFFERSIZE];
-  int index = getLine(str, src);
-  cleanBlank(str, index);
-  while (STATE){
-    printf(des, "%s", str);
-    index = getLine (str, src);
-    cleanBlank(str, index);
-  }
+cleanUp (FILE * src, FILE * des)
+{
+  char str[BUFFERSIZE];                 //the str we save our line in
+  int index = getLine (str, src);
+  cleanBlank (str, index);
+  // loops until EOF comes up
+  while (STATE)
+    {
+      fprintf (des, "%s\n", str);
+      index = getLine (str, src);
+      cleanBlank (str, index);
+    } // while
+
 }

@@ -4,12 +4,12 @@
 #include <stdio.h>
 #include <ctype.h>
 
-void
-upLowConversion (char * src, char * des);
+void upLowConversion (char *src, char *des);
 
 int
-main (int argc, char const *argv[]) {
-  upLowConversion("input.txt", "output.txt");
+main (int argc, char const *argv[])
+{
+  upLowConversion ("input.txt", "output.txt");
   return 0;
 }
 
@@ -23,16 +23,21 @@ main (int argc, char const *argv[]) {
 *       All upper case chars will become lowercase.
 */
 void
-upLowConversion (char * src, char * des){
-  FILE * input = fopen(src, "r");
-  FILE * output = fopen(des, "w");
-  char c;
-  while ((c = fgetc (input)) != EOF){
-    if (isupper(c)){
-      c = tolower(c);
-    }
-    fputc (c, output);
-  }
-  fclose(input);
-  fclose(output);
+upLowConversion (char *src, char *des)
+{
+  FILE *input = fopen (src, "r");     // file to read from
+  FILE *output = fopen (des, "w");    // file to print out to
+  char c;                             // a character to save the read char
+  // reads the input file untill it hits EOF
+  while ((c = fgetc (input)) != EOF)
+    {
+      // checks to see if c is upper case, if yes, turns it into lower case
+      if (isupper (c))
+	    {
+	     c = tolower (c);
+      } // if
+      fputc (c, output);
+    } // while
+  fclose (input);
+  fclose (output);
 }
