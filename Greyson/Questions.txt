@@ -1,4 +1,4 @@
-1. sed 's/\/r\/n/\/n/g' <INPUTFILE> > <OUTPUTFILE>
+1. sed 's/\\r\\n/\\n/g' <INPUTFILE> > <OUTPUTFILE>
 2. sed -e "s/[A-Z]/[a-z]/g" temp
 3. sed 's/[[:blank:]]*$//' <FILE>
 4. spell <FILE>
