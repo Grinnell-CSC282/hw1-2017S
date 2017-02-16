@@ -41,7 +41,7 @@ minFinder (int * arr, int len, int dest[2]);
 int
 main(int argc, char const *argv[])
 {
-  highestGrade("students.csv", "2", 5);
+  highestGrade(argv[1], argv[2], (atoi argv[3]));
   return 0;
 }
 
