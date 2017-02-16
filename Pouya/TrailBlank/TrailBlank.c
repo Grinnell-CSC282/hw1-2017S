@@ -10,6 +10,7 @@
 
 
 int static STATE = GO;
+int static BUFFER = GO;
 
 int static getLine (char *str, FILE * src);
 
@@ -46,6 +47,11 @@ getLine (char *str, FILE * src)
     {
       STATE = STOP;
     } // if
+
+  if (i == BUFFERSIZE)
+  {
+    BUFFER = STOP;
+  } // if
   return i;
 }
 
@@ -70,7 +76,15 @@ cleanUp (FILE * src, FILE * des)
   // loops until EOF comes up
   while (STATE)
     {
-      fprintf (des, "%s\n", str);
+      if (BUFFER)
+      {
+          fprintf (des, "%s", str);
+          BUFFER = GO;
+      }
+      else
+      {
+        fprintf (des, "%s\n", str);
+      }
       index = getLine (str, src);
       cleanBlank (str, index);
     } // while
